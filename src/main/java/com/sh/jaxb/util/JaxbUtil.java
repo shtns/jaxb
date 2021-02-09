@@ -1,5 +1,6 @@
-package com.sh.jaxb.test;
+package com.sh.jaxb.util;
 
+import cn.hutool.core.util.CharsetUtil;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -7,8 +8,11 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 /**
- * https://www.freeformatter.com/xsd-generator.html
- * xjc xsd所在目录 -d 生成的java类存放位置
+ * jaxb工具类
+ *
+ *
+ * java -jar trang-20181222.jar Test.xml Test.xsd
+ * xjc -encoding UTF-8 -p com.sh.jaxb.javabean Test.xsd
  *
  *
  * @author 盛浩
@@ -17,29 +21,18 @@ import java.io.StringWriter;
 public class JaxbUtil {
 
     /**
-     * JavaBean装换成xml
-     * 默认编码UTF-8
-     * @param obj
-     * @return
+     * javaBean转xml
+     *
+     * @param obj 对象
+     * @return xml
      */
-    public static String converTomXml(Object obj) {
-        return converToXml(obj,"UTF-8");
-
-    }
-
-    /**
-     * JavaBean装换成xml
-     * @param obj
-     * @param encoding
-     * @return
-     */
-    private static String converToXml(Object obj, String encoding) {
+    public static String conversionXml(Object obj) {
         String result = null;
         try {
             JAXBContext context = JAXBContext.newInstance(obj.getClass());
             Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
-            marshaller.setProperty(Marshaller.JAXB_ENCODING,encoding);
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, CharsetUtil.UTF_8);
             StringWriter writer = new StringWriter();
             marshaller.marshal(obj,writer);
             result =writer.toString();
@@ -50,13 +43,13 @@ public class JaxbUtil {
     }
 
     /**
-     * xml装换成JavaBean
-     * @param xml
-     * @param c
-     * @return
+     * xml转javaBean
+     *
+     * @param xml xml
+     * @param c 类
+     * @return javaBean
      */
-    @SuppressWarnings("unchecked")
-    public static<T> T converyToJavaBean(String xml,Class<T> c){
+    public static<T> T conversionJavaBean(String xml,Class<T> c){
         T t = null;
         try {
             JAXBContext context = JAXBContext.newInstance(c);
@@ -65,8 +58,6 @@ public class JaxbUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return t;
-
     }
 }

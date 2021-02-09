@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<organization>
+    <userInfo>
+        <userId>1</userId>
+        <loginAccount>zhangsan</loginAccount>
+        <password>123456</password>
+        <addressInfo>
+            <addressTest>地址测试</addressTest>
+            <addressDetails>地址详情</addressDetails>
+        </addressInfo>
+    </userInfo>
+    <roleInfo>
+        <roleId>1</roleId>
+        <roleName>管理员</roleName>
+        <roleNameEn>123456</roleNameEn>
+    </roleInfo>
+    <menuInfo>
+        <MenuId>1</MenuId>
+        <MenuName>管理员</MenuName>
+        <MenuPath>/test</MenuPath>
+    </menuInfo>
+</organization>
